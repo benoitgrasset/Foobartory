@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+This application has been deployed here: https://benoitgrasset.github.io/foobartory/
+
 You can find [here](/remarks.md) the remarks about the project.
 
 ## Available Scripts
