@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/foobartory/static/css/main.c4f417e5.css",
-    "main.js": "/foobartory/static/js/main.c57838b7.js",
+    "main.js": "/foobartory/static/js/main.908c25b0.js",
     "static/media/robot.png": "/foobartory/static/media/robot.b6a79036f65b026a8167.png",
     "index.html": "/foobartory/index.html",
     "main.c4f417e5.css.map": "/foobartory/static/css/main.c4f417e5.css.map",
-    "main.c57838b7.js.map": "/foobartory/static/js/main.c57838b7.js.map"
+    "main.908c25b0.js.map": "/foobartory/static/js/main.908c25b0.js.map"
   },
   "entrypoints": [
     "static/css/main.c4f417e5.css",
-    "static/js/main.c57838b7.js"
+    "static/js/main.908c25b0.js"
   ]
 }
