@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/foobartory/static/css/main.a9fd7afe.css",
+    "main.js": "/foobartory/static/js/main.c57838b7.js",
+    "static/media/robot.png": "/foobartory/static/media/robot.b6a79036f65b026a8167.png",
+    "index.html": "/foobartory/index.html",
+    "main.a9fd7afe.css.map": "/foobartory/static/css/main.a9fd7afe.css.map",
+    "main.c57838b7.js.map": "/foobartory/static/js/main.c57838b7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a9fd7afe.css",
+    "static/js/main.c57838b7.js"
+  ]
+}
