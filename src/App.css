@@ -1,14 +1,75 @@
-.App {
-  text-align: center;
+.container {
+  margin: 10px 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container > * {
+  margin: 10px 0;
+
+}
+
+.dashboard {
+  width: 200px;
+}
+
+.dashboard > div {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+}
+
+.app-header {
+  background-color: #282c34;
+  height: 50px;
+  display: flex;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.robot-container {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 500px;
+}
+
+.buttons > * {
+  margin: 5px 5px 5px 0!important;
+}
+
+.robot {
+  display: flex;
+  align-items: center;
+}
+
+.robot-image {
+  margin-left: 5px;
+}
+
+.robot-text {
+  width: 80px;
+}
+
+.time-text {
+  width: 130px;
+}
+
+.fontWeightBold {
+  font-weight: 600!important;
+}
+
+.icon {
+  width: 20px;
+}
+
+.progress {
+  width: 100px;
+  height: 5px;
+  margin-left: 10px;
 }
