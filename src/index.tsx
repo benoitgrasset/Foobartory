@@ -13,10 +13,18 @@ const theme = createTheme({
   }
 })
 
+const params = {
+  foo: 0,
+  bar: 0,
+  foobar: 0
+}
+
+export type FooBarToryParams = typeof params
+
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-    <App nbRobotsInit={2}/>
+    <App params={params} nbRobots={2}/>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')

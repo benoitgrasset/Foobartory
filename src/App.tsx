@@ -1,9 +1,10 @@
 import React from 'react';
-import { Tooltip, Typography, Button, Backdrop, Snackbar, Alert, LinearProgress } from '@mui/material';
+import { Tooltip, Typography, Button, Backdrop, Snackbar, Alert } from '@mui/material';
 import { styled, Theme } from '@mui/material/styles';
 import './App.css';
-import Robot from './ressources/robot.png';
-import { LoadingButton } from './components/LoadingButton';
+import RobotImg from './ressources/robot.png';
+import { Robot, IRobot, LastAction } from './components/Robot';
+import { FooBarToryParams } from './index'
 
 const nbMaxRobots = 20;
 
@@ -12,15 +13,6 @@ const robotInit = {
   timeMax: 0,
   lastAction: undefined
 };
-
-type LastAction = undefined | "foo" | "bar" | "foobar"
-
-type IRobot = {
-  time: number,
-  timeMax: number,
-  id: number,
-  lastAction: LastAction
-}
 
 const updateRobot = (robots: Array<IRobot>, id: number, increment: number, lastAction: LastAction) => {
   return robots.map(robot => {
@@ -34,14 +26,15 @@ const StyledButton = styled(Button)(() => ({
   textTransform: 'capitalize',
 }))
 
-const App: React.FC<{ nbRobotsInit: number }> = (props) => {
+const App: React.FC<{ params: FooBarToryParams, nbRobots: number }> = (props) => {
 
-  const robotsInit: Array<IRobot> = [...Array(props.nbRobotsInit)].map((x, i) => ({ ...robotInit, id: i + 1 }));
+  const { params } = props;
+  const robotsInit: Array<IRobot> = [...Array(props.nbRobots)].map((x, i) => ({ ...robotInit, id: i + 1 }));
 
   const [robots, setRobots] = React.useState(robotsInit);
-  const [foo, setFoo] = React.useState(0);
-  const [bar, setBar] = React.useState(0);
-  const [foobar, setFoobar] = React.useState(0);
+  const [foo, setFoo] = React.useState(params.foo);
+  const [bar, setBar] = React.useState(params.bar);
+  const [foobar, setFoobar] = React.useState(params.foobar);
   const [open, setOpen] = React.useState(false);
   const [openAlert, setOpenAlert] = React.useState(false);
 
@@ -83,15 +76,6 @@ const App: React.FC<{ nbRobotsInit: number }> = (props) => {
     }
   }
 
-  const canBuildFoobars = foo > 0 && bar > 0
-
-  const getBuildFoobarMessage = () => {
-    if (foo < 1 && bar < 1) return "Pas assez de foos et de bars"
-    if (foo < 1) return "Pas assez de foos"
-    if (bar < 1) return "Pas assez de bars"
-    else return ""
-  }
-
   const canBuyRobots = foobar >= 3 && foo >= 6
 
   const getBuyRobotsMessage = () => {
@@ -120,13 +104,13 @@ const App: React.FC<{ nbRobotsInit: number }> = (props) => {
     <>
       <header className="app-header">
         Foobartory
-        <img src={Robot} alt='robot' height={35} width={35} className='robot-image' />
+        <img src={RobotImg} alt='robot' height={35} width={35} className='robot-image' />
       </header>
       <div className='container'>
         <div className="dashboard">
-          <div><Typography>Nombre de foos: </Typography><Typography>{foo}</Typography></div>
-          <div><Typography>Nombre de bars: </Typography><Typography>{bar}</Typography></div>
-          <div><Typography>Nombre de foobars: </Typography><Typography>{foobar}</Typography></div>
+          <div><Typography>Nombre de foos: </Typography><Typography data-testid="foo">{foo}</Typography></div>
+          <div><Typography>Nombre de bars: </Typography><Typography data-testid="bar">{bar}</Typography></div>
+          <div><Typography>Nombre de foobars: </Typography><Typography data-testid="foobar">{foobar}</Typography></div>
           <div>
             <Typography color='secondary' className='fontWeightBold'>Nombre de robots: </Typography>
             <Typography color='secondary'>{nbRobots}</Typography>
@@ -140,32 +124,12 @@ const App: React.FC<{ nbRobotsInit: number }> = (props) => {
         </Tooltip>
         <div className='robot-container' data-testid="robot-container">
           {robots.map(robot => {
-            const { id, time, timeMax, lastAction } = robot;
-            const isWorking = time > 0;
             return (
-              <div key={id} className='robot' data-testid="robot">
-                <div className='buttons'>
-                  <Typography className='robot-text'>{`Robot ${id}`} {isWorking && '🚧'}</Typography>
-                  <LoadingButton onClick={() => handleMineFoo(id, lastAction)}
-                    loading={isWorking} variant={lastAction === "foo" ? "contained" : "outlined"}>
-                    Miner foo
-                  </LoadingButton>
-                  <LoadingButton onClick={() => handleMineBar(id, lastAction)}
-                    loading={isWorking} variant={lastAction === "bar" ? "contained" : "outlined"}>
-                    Miner bar
-                  </LoadingButton>
-                  <Tooltip title={getBuildFoobarMessage()}>
-                    <div>
-                      <LoadingButton onClick={() => handleBuildFoobar(id, lastAction)}
-                        disabled={!canBuildFoobars} loading={isWorking} variant={lastAction === "foobar" ? "contained" : "outlined"}>
-                        Assembler foobar
-                      </LoadingButton>
-                    </div>
-                  </Tooltip>
-                </div>
-                <Typography className='time-text'>⌛ Temps: {time} (s)</Typography>
-                <LinearProgress variant="determinate" className='progress' value={(time * 100) / timeMax} />
-              </div>
+              <Robot robot={robot} foo={foo} bar={bar}
+                handleMineFoo={handleMineFoo}
+                handleMineBar={handleMineBar}
+                handleBuildFoobar={handleBuildFoobar}
+              />
             )
           })}
         </div>
