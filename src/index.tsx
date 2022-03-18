@@ -16,7 +16,7 @@ const theme = createTheme({
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-    <App />
+    <App nbRobotsInit={2}/>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')

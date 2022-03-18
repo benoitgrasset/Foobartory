@@ -5,7 +5,6 @@ import './App.css';
 import Robot from './ressources/robot.png';
 import { LoadingButton } from './components/LoadingButton';
 
-const nbRobotsInit = 2;
 const nbMaxRobots = 20;
 
 const robotInit = {
@@ -23,8 +22,6 @@ type IRobot = {
   lastAction: LastAction
 }
 
-const robotsInit: Array<IRobot> = [...Array(nbRobotsInit)].map((x, i) => ({ ...robotInit, id: i + 1 }));
-
 const updateRobot = (robots: Array<IRobot>, id: number, increment: number, lastAction: LastAction) => {
   return robots.map(robot => {
     const time = robot.time + increment;
@@ -37,7 +34,9 @@ const StyledButton = styled(Button)(() => ({
   textTransform: 'capitalize',
 }))
 
-const App: React.FC = () => {
+const App: React.FC<{ nbRobotsInit: number }> = (props) => {
+
+  const robotsInit: Array<IRobot> = [...Array(props.nbRobotsInit)].map((x, i) => ({ ...robotInit, id: i + 1 }));
 
   const [robots, setRobots] = React.useState(robotsInit);
   const [foo, setFoo] = React.useState(0);
@@ -139,12 +138,12 @@ const App: React.FC = () => {
               disabled={!canBuyRobots} size="medium">Acheter robot</StyledButton>
           </span>
         </Tooltip>
-        <div className='robot-container'>
+        <div className='robot-container' data-testid="robot-container">
           {robots.map(robot => {
             const { id, time, timeMax, lastAction } = robot;
             const isWorking = time > 0;
             return (
-              <div key={id} className='robot'>
+              <div key={id} className='robot' data-testid="robot">
                 <div className='buttons'>
                   <Typography className='robot-text'>{`Robot ${id}`} {isWorking && '🚧'}</Typography>
                   <LoadingButton onClick={() => handleMineFoo(id, lastAction)}
