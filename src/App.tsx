@@ -5,7 +5,7 @@ import './App.css';
 import Robot from './ressources/robot.png';
 import { LoadingButton } from './components/LoadingButton';
 
-const nbRobotsInit = 20;
+const nbRobotsInit = 2;
 const nbMaxRobots = 20;
 
 const robotInit = {
