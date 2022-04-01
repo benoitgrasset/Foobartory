@@ -36,7 +36,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 500px;
+  width: 510px;
 }
 
 .buttons > * {
@@ -53,7 +53,7 @@
 }
 
 .robot-text {
-  width: 80px;
+  width: 90px;
 }
 
 .time-text {

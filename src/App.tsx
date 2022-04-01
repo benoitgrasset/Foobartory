@@ -1,18 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tooltip, Typography, Button, Backdrop, Snackbar, Alert } from '@mui/material';
 import { styled, Theme } from '@mui/material/styles';
 import './App.css';
 import RobotImg from './ressources/robot.png';
 import { Robot, IRobot, LastAction } from './components/Robot';
-import { FooBarToryParams } from './index'
-
-const nbMaxRobots = 20;
-
-const robotInit = {
-  time: 0,
-  timeMax: 0,
-  lastAction: undefined
-};
+import { FooBarToryParams, nbMaxRobots, robotInit } from './index'
 
 const updateRobot = (robots: Array<IRobot>, id: number, increment: number, lastAction: LastAction) => {
   return robots.map(robot => {
@@ -31,12 +23,12 @@ const App: React.FC<{ params: FooBarToryParams, nbRobots: number }> = (props) =>
   const { params } = props;
   const robotsInit: Array<IRobot> = [...Array(props.nbRobots)].map((x, i) => ({ ...robotInit, id: i + 1 }));
 
-  const [robots, setRobots] = React.useState(robotsInit);
-  const [foo, setFoo] = React.useState(params.foo);
-  const [bar, setBar] = React.useState(params.bar);
-  const [foobar, setFoobar] = React.useState(params.foobar);
-  const [open, setOpen] = React.useState(false);
-  const [openAlert, setOpenAlert] = React.useState(false);
+  const [robots, setRobots] = useState(robotsInit);
+  const [foo, setFoo] = useState(params.foo);
+  const [bar, setBar] = useState(params.bar);
+  const [foobar, setFoobar] = useState(params.foobar);
+  const [open, setOpen] = useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
 
   const handleCloseBackdrop = () => {
     setOpen(false)
@@ -92,9 +84,12 @@ const App: React.FC<{ params: FooBarToryParams, nbRobots: number }> = (props) =>
     setOpen(robots.length + 1 === nbMaxRobots)
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     const timeoutHandler = () => {
-      setRobots(robots => robots.map(robot => ({ ...robot, time: robot.time > 0 ? robot.time - 0.5 : robot.time })))
+      setRobots(robots => robots.map(robot => {
+        if (false) return ({ ...robot, time: robot.time > 0 ? robot.time - 0.5 : robot.time })
+        else return robot
+      }))
     }
     const interval = setInterval(timeoutHandler, 500);
     return () => clearInterval(interval);
@@ -129,6 +124,7 @@ const App: React.FC<{ params: FooBarToryParams, nbRobots: number }> = (props) =>
                 handleMineFoo={handleMineFoo}
                 handleMineBar={handleMineBar}
                 handleBuildFoobar={handleBuildFoobar}
+                key={robot.id}
               />
             )
           })}

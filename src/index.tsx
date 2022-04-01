@@ -19,12 +19,20 @@ const params = {
   foobar: 0
 }
 
+export const nbMaxRobots = 12;
+
+export const robotInit = {
+  time: 0,
+  timeMax: 0,
+  lastAction: undefined
+};
+
 export type FooBarToryParams = typeof params
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-    <App params={params} nbRobots={2}/>
+      <App params={params} nbRobots={2} />
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')

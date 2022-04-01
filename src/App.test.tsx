@@ -35,12 +35,12 @@ test('+1 foo is added when mining', () => {
 
 test('+1 bar is added when mining', () => {
   render(<App nbRobots={2} params={params} />);
-  const nbFoos = screen.getByTestId("bar");
-  expect(nbFoos).toHaveTextContent('0')
+  const nbBars = screen.getByTestId("bar");
+  expect(nbBars).toHaveTextContent('0')
   const buttons = screen.getAllByTestId("mine-bar")
   expect(buttons).toHaveLength(2);
   fireEvent.click(buttons[0])
-  expect(nbFoos).toHaveTextContent('1')
+  expect(nbBars).toHaveTextContent('1')
 });
 
 test('foobar building', () => {

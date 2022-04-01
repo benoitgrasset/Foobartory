@@ -40,15 +40,15 @@ export const Robot: React.FC<RobotProps> = props => {
         <div className='buttons'>
             <Typography className='robot-text'>{`Robot ${id}`} {isWorking && '🚧'}</Typography>
             <LoadingButton onClick={() => handleMineFoo(id, lastAction)} data-testid="mine-foo" loading={isWorking} variant={lastAction === "foo" ? "contained" : "outlined"}>
-                Miner foo
+                {lastAction === "foo" ? "Miner foo 🤖" : "Miner foo"}
             </LoadingButton>
             <LoadingButton onClick={() => handleMineBar(id, lastAction)} data-testid="mine-bar" loading={isWorking} variant={lastAction === "bar" ? "contained" : "outlined"}>
-                Miner bar
+                {lastAction === "bar" ? "Miner bar 🤖" : "Miner bar"}
             </LoadingButton>
             <Tooltip title={getBuildFoobarMessage()}>
                 <div>
                     <LoadingButton onClick={() => handleBuildFoobar(id, lastAction)} data-testid="build-foobar" disabled={!canBuildFoobars} loading={isWorking} variant={lastAction === "foobar" ? "contained" : "outlined"}>
-                        Assembler foobar
+                        {lastAction === "foobar" ? "Assember foobar 🤖" : "Assembler foobar"}
                     </LoadingButton>
                 </div>
             </Tooltip>
