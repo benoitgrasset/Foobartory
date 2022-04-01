@@ -39,15 +39,19 @@ export const Robot: React.FC<RobotProps> = props => {
     return <div key={id} className='robot' data-testid="robot">
         <div className='buttons'>
             <Typography className='robot-text'>{`Robot ${id}`} {isWorking && '🚧'}</Typography>
-            <LoadingButton onClick={() => handleMineFoo(id, lastAction)} data-testid="mine-foo" loading={isWorking} variant={lastAction === "foo" ? "contained" : "outlined"}>
+            <LoadingButton onClick={() => handleMineFoo(id, lastAction)}
+                data-testid="mine-foo" loading={isWorking} variant={lastAction === "foo" ? "contained" : "outlined"}>
                 {lastAction === "foo" ? "Miner foo 🤖" : "Miner foo"}
             </LoadingButton>
-            <LoadingButton onClick={() => handleMineBar(id, lastAction)} data-testid="mine-bar" loading={isWorking} variant={lastAction === "bar" ? "contained" : "outlined"}>
+            <LoadingButton onClick={() => handleMineBar(id, lastAction)}
+                data-testid="mine-bar" loading={isWorking} variant={lastAction === "bar" ? "contained" : "outlined"}>
                 {lastAction === "bar" ? "Miner bar 🤖" : "Miner bar"}
             </LoadingButton>
             <Tooltip title={getBuildFoobarMessage()}>
                 <div>
-                    <LoadingButton onClick={() => handleBuildFoobar(id, lastAction)} data-testid="build-foobar" disabled={!canBuildFoobars} loading={isWorking} variant={lastAction === "foobar" ? "contained" : "outlined"}>
+                    <LoadingButton onClick={() => handleBuildFoobar(id, lastAction)}
+                        data-testid="build-foobar" disabled={!canBuildFoobars} loading={isWorking}
+                        variant={lastAction === "foobar" ? "contained" : "outlined"}>
                         {lastAction === "foobar" ? "Assember foobar 🤖" : "Assembler foobar"}
                     </LoadingButton>
                 </div>
