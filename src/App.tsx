@@ -110,23 +110,22 @@ const App: React.FC<{ params: FooBarToryParams; nbRobots: number }> = (
         setOpen(robots.length + 1 === nbMaxRobots)
     }
 
+    const timeRunningOut =
+        robots.reduce((acc, robot) => acc + robot.time, 0) > 0
+
     useEffect(() => {
         const timeoutHandler = () => {
-            setRobots((robots) =>
-                robots.map((robot) => {
-                    if (false)
-                        return {
-                            ...robot,
-                            time:
-                                robot.time > 0 ? robot.time - 0.5 : robot.time,
-                        }
-                    else return robot
-                })
-            )
+            timeRunningOut &&
+                setRobots((robots) =>
+                    robots.map((robot) => ({
+                        ...robot,
+                        time: robot.time > 0 ? robot.time - 0.5 : robot.time,
+                    }))
+                )
         }
         const interval = setInterval(timeoutHandler, 500)
         return () => clearInterval(interval)
-    }, [])
+    }, [timeRunningOut])
 
     return (
         <>
